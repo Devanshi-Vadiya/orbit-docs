@@ -1,69 +1,161 @@
-import Image from "next/image";
+
+const sections = [
+  {
+    title: "Getting Started",
+    description: "Quickstart guides, prerequisites, and initial project configuration.",
+    link: "Start reading",
+    href: "/docs/introduction",
+    icon: "↳",
+  },
+  {
+    title: "Core Concepts",
+    description: "Deep dive into nested routing patterns, layouts, and data loading.",
+    link: "Explore concepts",
+    href: "/docs/routing",
+    icon: "⑂",
+  },
+  {
+    title: "Reference",
+    description: "Configuration options, project settings, and CLI commands.",
+    link: "View reference",
+    href: "/docs/configuration",
+    icon: "⚙",
+  },
+];
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="docs-app">
+      <header className="topbar">
+        <a href="/" className="brand">
+          <span className="brand-mark">O</span>
+          Orbit Docs
+        </a>
+
+        <nav className="topbar-nav">
+          <a className="active" href="/">Documentation</a>
+          <a href="/guides">Guides</a>
+          <a href="/about">About</a>
+        </nav>
+
+        <div className="topbar-actions">
+          <input
+            className="header-search"
+            type="search"
+            placeholder="Search documentation..."
+            aria-label="Search documentation"
+          />
+          <span className="version">v1.0</span>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+      </header>
+
+      <div className="docs-body">
+        <aside className="sidebar">
+          <div className="sidebar-title">Core Documentation</div>
+          <p className="sidebar-subtitle">v1.0 Architecture Guide</p>
+
+          <div className="sidebar-group">
+            <p className="sidebar-heading">GETTING STARTED</p>
+            <a className="sidebar-link active" href="/docs/introduction">
+              ↳ &nbsp; Introduction
+            </a>
+            <a className="sidebar-link" href="/docs/installation">
+              ↓ &nbsp; Installation
+            </a>
+            <a className="sidebar-link" href="/docs/project-setup">
+              ▱ &nbsp; Project Setup
+            </a>
+          </div>
+
+          <div className="sidebar-group">
+            <p className="sidebar-heading">CORE CONCEPTS</p>
+            <a className="sidebar-link" href="/docs/routing">
+              ⑂ &nbsp; Routing
+            </a>
+            <a className="sidebar-link" href="/docs/layouts">
+              ▣ &nbsp; Layouts
+            </a>
+            <a className="sidebar-link" href="/docs/data-fetching">
+              ↻ &nbsp; Data Fetching
+            </a>
+          </div>
+
+          <div className="sidebar-group">
+            <p className="sidebar-heading">REFERENCE</p>
+            <a className="sidebar-link" href="/docs/configuration">
+              ⚙ &nbsp; Configuration
+            </a>
+            <a className="sidebar-link" href="/docs/cli">
+              ▣ &nbsp; CLI Commands
+            </a>
+          </div>
+
+          <div className="sidebar-bottom">
+            <a href="https://github.com/Devanshi-Vadiya/orbit-docs">
+              ↗ &nbsp; GitHub Repository
+            </a>
+            <a href="/api-reference">▤ &nbsp; API Reference</a>
+          </div>
+        </aside>
+
+        <main className="main-content">
+          <div className="breadcrumbs">
+            <span>Orbit Docs</span>
+            <span>/</span>
+            <strong>Overview</strong>
+          </div>
+
+          <section className="page-intro">
+            <h1>Documentation</h1>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Explore the architecture, setup guides, and references
+              for building modern web applications.
+            </p>
+          </section>
+
+          <section className="section-list">
+            {sections.map((section) => (
+              <article className="section-card" key={section.title}>
+                <h2>
+                  <span className="section-icon">{section.icon}</span>
+                  {section.title}
+                </h2>
+                <p>{section.description}</p>
+                <a href={section.href}>
+                  {section.link} <span>→</span>
+                </a>
+              </article>
+            ))}
+          </section>
+
+          <section className="info-panel">
+            <h3>ⓘ &nbsp; Architecture Alignment</h3>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Review the project structure and configuration before
+              getting started.
+            </p>
+          </section>
+
+          <section className="terminal">
+            <div className="terminal-heading">
+              Terminal – Quick Setup
+              <span>⌘ Copy</span>
+            </div>
+            <pre>{`$ npx create-next-app@latest my-app
+$ cd my-app && npm run dev`}</pre>
+          </section>
+
+          <footer className="site-footer">
+            <span>● &nbsp; Orbit Docs v1.0</span>
+            <div>
+              <a href="/license">Documentation License</a>
+              <a href="/changelog">Changelog</a>
+            </div>
+          </footer>
+        </main>
+      </div>
     </div>
   );
 }
