@@ -1,3 +1,7 @@
+import Link from "next/link";
+import Breadcrumbs from "@/components/breadcrumbs";
+import Callout from "@/components/callout";
+import CodeBlock from "@/components/code-block";
 
 const sections = [
   {
@@ -9,153 +13,85 @@ const sections = [
   },
   {
     title: "Core Concepts",
-    description: "Deep dive into nested routing patterns, layouts, and data loading.",
+    description: "Deep dive into nested routing patterns, catch-all paths, and data loading.",
     link: "Explore concepts",
     href: "/docs/routing",
     icon: "⑂",
   },
   {
     title: "Reference",
-    description: "Configuration options, project settings, and CLI commands.",
+    description: "Detailed configuration parameters, flags, and CLI commands.",
     link: "View reference",
     href: "/docs/configuration",
     icon: "⚙",
   },
 ];
 
-export default function Home() {
+export default function HomePage() {
+  const terminalCode = `$ npx orbit-cli create my-app --template standard
+$ cd my-app && npm run dev`;
+
   return (
-    <div className="docs-app">
-      <header className="topbar">
-        <a href="/" className="brand">
-          <span className="brand-mark">O</span>
-          Orbit Docs
-        </a>
+    <main className="main-content">
+      {/* Breadcrumbs matching Screenshot 3 */}
+      <Breadcrumbs
+        items={[
+          { label: "Orbit Docs", href: "/" },
+          { label: "Overview" },
+        ]}
+      />
 
-        <nav className="topbar-nav">
-          <a className="active" href="/">Documentation</a>
-          <a href="/guides">Guides</a>
-          <a href="/about">About</a>
-        </nav>
+      {/* Page Title & Intro */}
+      <section className="page-intro">
+        <h1 className="page-title">Documentation</h1>
+        <p className="page-description">
+          Welcome to Orbit Docs. Explore the core architecture, installation guides, and complete API references for building scalable modern web applications.
+        </p>
+      </section>
 
-        <div className="topbar-actions">
-          <input
-            className="header-search"
-            type="search"
-            placeholder="Search documentation..."
-            aria-label="Search documentation"
-          />
-          <span className="version">v1.0</span>
-        </div>
-      </header>
-
-      <div className="docs-body">
-        <aside className="sidebar">
-          <div className="sidebar-title">Core Documentation</div>
-          <p className="sidebar-subtitle">v1.0 Architecture Guide</p>
-
-          <div className="sidebar-group">
-            <p className="sidebar-heading">GETTING STARTED</p>
-            <a className="sidebar-link active" href="/docs/introduction">
-              ↳ &nbsp; Introduction
-            </a>
-            <a className="sidebar-link" href="/docs/installation">
-              ↓ &nbsp; Installation
-            </a>
-            <a className="sidebar-link" href="/docs/project-setup">
-              ▱ &nbsp; Project Setup
-            </a>
-          </div>
-
-          <div className="sidebar-group">
-            <p className="sidebar-heading">CORE CONCEPTS</p>
-            <a className="sidebar-link" href="/docs/routing">
-              ⑂ &nbsp; Routing
-            </a>
-            <a className="sidebar-link" href="/docs/layouts">
-              ▣ &nbsp; Layouts
-            </a>
-            <a className="sidebar-link" href="/docs/data-fetching">
-              ↻ &nbsp; Data Fetching
-            </a>
-          </div>
-
-          <div className="sidebar-group">
-            <p className="sidebar-heading">REFERENCE</p>
-            <a className="sidebar-link" href="/docs/configuration">
-              ⚙ &nbsp; Configuration
-            </a>
-            <a className="sidebar-link" href="/docs/cli">
-              ▣ &nbsp; CLI Commands
-            </a>
-          </div>
-
-          <div className="sidebar-bottom">
-            <a href="https://github.com/Devanshi-Vadiya/orbit-docs">
-              ↗ &nbsp; GitHub Repository
-            </a>
-            <a href="/api-reference">▤ &nbsp; API Reference</a>
-          </div>
-        </aside>
-
-        <main className="main-content">
-          <div className="breadcrumbs">
-            <span>Orbit Docs</span>
-            <span>/</span>
-            <strong>Overview</strong>
-          </div>
-
-          <section className="page-intro">
-            <h1>Documentation</h1>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Explore the architecture, setup guides, and references
-              for building modern web applications.
-            </p>
-          </section>
-
-          <section className="section-list">
-            {sections.map((section) => (
-              <article className="section-card" key={section.title}>
-                <h2>
-                  <span className="section-icon">{section.icon}</span>
-                  {section.title}
-                </h2>
-                <p>{section.description}</p>
-                <a href={section.href}>
-                  {section.link} <span>→</span>
-                </a>
-              </article>
-            ))}
-          </section>
-
-          <section className="info-panel">
-            <h3>ⓘ &nbsp; Architecture Alignment</h3>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Review the project structure and configuration before
-              getting started.
-            </p>
-          </section>
-
-          <section className="terminal">
-            <div className="terminal-heading">
-              Terminal – Quick Setup
-              <span>⌘ Copy</span>
+      {/* 3 Section Cards */}
+      <section className="section-list">
+        {sections.map((section) => (
+          <article className="section-card" key={section.title}>
+            <h2 className="section-card-title">
+              <span className="section-card-icon">{section.icon}</span>
+              <span>{section.title}</span>
+            </h2>
+            <p className="section-card-desc">{section.description}</p>
+            <div className="section-card-footer">
+              <Link href={section.href} className="section-card-link">
+                <span>{section.link}</span>
+                <span className="arrow-icon">→</span>
+              </Link>
             </div>
-            <pre>{`$ npx create-next-app@latest my-app
-$ cd my-app && npm run dev`}</pre>
-          </section>
+          </article>
+        ))}
+      </section>
 
-          <footer className="site-footer">
-            <span>● &nbsp; Orbit Docs v1.0</span>
-            <div>
-              <a href="/license">Documentation License</a>
-              <a href="/changelog">Changelog</a>
-            </div>
-          </footer>
-        </main>
+      {/* Architecture Alignment Notice */}
+      <Callout type="info" title="Architecture Alignment">
+        Orbit 1.0 utilizes unified server-driven component composition with strict compile-time static checks. Ensure you review the configuration parameters before migration.
+      </Callout>
+
+      {/* Quick Setup Terminal Box with interactive Copy button */}
+      <div className="homepage-terminal-wrapper">
+        <CodeBlock
+          filename="Terminal — Quick Setup"
+          code={terminalCode}
+        />
       </div>
-    </div>
+
+      {/* Site Footer */}
+      <footer className="site-footer">
+        <div className="footer-left">
+          <span className="footer-status-dot">●</span>
+          <span>Orbit framework v1.0.4 stable release</span>
+        </div>
+        <div className="footer-links">
+          <Link href="/license">Documentation License</Link>
+          <Link href="/changelog">Changelog</Link>
+        </div>
+      </footer>
+    </main>
   );
 }
